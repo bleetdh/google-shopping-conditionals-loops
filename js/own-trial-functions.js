@@ -160,3 +160,24 @@
 // for (var z = 0; z < items.length; z++) {
 //   console.log(items[z].product.title + ' is made by ' + items[z].product.brand + '. Its price is ' + items[z].product.inventories[0].price + '. You can see it from ' + items[z].product.images)
 // }
+
+// PRIMA's FUNCTION ANSWER
+var data = require('../products.json')
+// #1
+function getItems (obj) {
+  return obj.items
+}
+// getItems(data)
+// #2
+var items = getItems(data)
+
+function getItemsByBrand (items, searchBrand) {
+// this inner function always return true or false, based on brand name
+  function isEqualToBrandName(item) {
+    return item.product.brand === searchBrand
+  }
+  var newFilteredArray = items.filter(isEqualToBrandName)
+  return newFilteredArray
+}
+
+console.log(getItemsByBrand(items, 'Nkon'))

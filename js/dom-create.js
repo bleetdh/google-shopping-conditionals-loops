@@ -47,37 +47,35 @@ document.addEventListener('DOMContentLoaded', function () {
     // 2.) getItemsByBrand(items, brand)
     function getItemsByBrand (items, searchBrand) {
       items = data.items
-      searchBrand = searchByBrand.textContent
-      var arrBrand = []
+      searchBrand = searchByBrand.value
       for (var k = 0; k < items.length; k++) {
         var brand = items[k].product.brand
         if (searchBrand === brand) {
-          arrBrand.push(items[k].product.brand)
-          var newBrand = document.createElement('li')
-          newBrand.textContent = arrBrand[k]
-          shoppingList.appendChild(newBrand)
+          items.forEach(function (item) {
+            var listItem = document.createElement('li')
+            listItem.textContent = items[k].product.title
+            shoppingList.appendChild(listItem)
+          })
         }
-      }console.log(arrBrand)
+      }
     }
 
     // 3.) getItemsByAuthor(items, author)
     function getItemsByAuthor (items, searchAuthor) {
       items = data.items
-      searchAuthor = searchByAuthor.textContent
-      var arrAuthor = []
+      searchAuthor = searchByAuthor.value
       for (var x = 0; x < items.length; x++) {
         var author = items[x].product.author.name
         for (var y = 0; y <= searchAuthor.length; y++) {
           if (author.substring(0, y) === searchAuthor) {
-            arrAuthor.push(items[x].product.title)
-            var newAuthor = document.createElement('li')
-            newAuthor.textContent = arrAuthor[x]
-            shoppingList.appendChild(newAuthor)
-            // myCart.appendChild(arrAuthor[x])
+            items.forEach(function (item) {
+              var listItem = document.createElement('li')
+              listItem.textContent = items[x].product.title
+              shoppingList.appendChild(listItem)
+            })
           }
         }
       }
-      console.log(arrAuthor)
     }
 
     // DO NOT REMOVE ANYTHING AFTER THIS LINE

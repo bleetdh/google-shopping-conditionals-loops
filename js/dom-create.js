@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   .then(res => res.json())
   .then((data) => {
     // DO NOT REMOVE ANYTHING BEFORE THIS LINE
-    console.log('Checkout this JSON! ', data)
+    console.log('Checkout this JSON! ', data.items)
 
     // START YOUR CODE FROM HERE AND HERE ONLY
     // ALL YOUR INTERNAL FUNCTIONS SHOULD START FROM HERE AND HERE ONLY TOO
@@ -37,10 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchByBrand = document.querySelector('.searchByBrand')
     var searchByAuthor = document.querySelector('.searchByAuthor')
 
-    // target list from shoppingList
-    var shoppingList1 = document.querySelectorAll('#shopping-list li')
-
     function addToCart () {
+      var shoppingList1 = document.querySelectorAll('#shopping-list li')
       var lastItem = shoppingList1[shoppingList1.length - 1]
       myCart.appendChild(lastItem)
     }
@@ -48,14 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function getItemsByBrand (items, searchBrand) {
       items = data.items
       searchBrand = searchByBrand.value
+      shoppingList.textContent = ''
       for (var k = 0; k < items.length; k++) {
         var brand = items[k].product.brand
         if (searchBrand === brand) {
-          items.forEach(function (item) {
-            var listItem = document.createElement('li')
-            listItem.textContent = items[k].product.title
-            shoppingList.appendChild(listItem)
-          })
+          var listItem = document.createElement('li')
+          listItem.textContent = items[k].product.title
+          shoppingList.appendChild(listItem)
         }
       }
     }
@@ -64,15 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function getItemsByAuthor (items, searchAuthor) {
       items = data.items
       searchAuthor = searchByAuthor.value
+      shoppingList.textContent = ''
       for (var x = 0; x < items.length; x++) {
         var author = items[x].product.author.name
         for (var y = 0; y <= searchAuthor.length; y++) {
           if (author.substring(0, y) === searchAuthor) {
-            items.forEach(function (item) {
-              var listItem = document.createElement('li')
-              listItem.textContent = items[x].product.title
-              shoppingList.appendChild(listItem)
-            })
+            var listItem = document.createElement('li')
+            listItem.textContent = items[x].product.title
+            shoppingList.appendChild(listItem)
           }
         }
       }
